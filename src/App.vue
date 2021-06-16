@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      Name
+      <input type="text" v-model="name">
+      Age
+      <input type="text" v-model="age">
+      City
+      <input type="text" v-model="city">
+      <button @click="add()">Add Person</button>
+    <PersonListOne></PersonListOne>
+    <PersonListTwo></PersonListTwo>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+import PersonListTwo from './components/PersonListTwo.vue'
+import PersonListOne from './components/PersonListOne.vue'
 export default {
   name: 'App',
+  data(){
+    return{
+      name : null,
+      age : null,
+      city : null,
+    }
+  },
   components: {
-    HelloWorld
+    PersonListOne, PersonListTwo,
+  },
+  methods:{
+    add(){
+        var payload = {name:this.name,age :this.age, city :this.city}
+        this.$store.dispatch('addPerson',payload);
+    }
   }
+  
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
